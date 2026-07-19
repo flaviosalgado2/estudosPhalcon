@@ -1,0 +1,31 @@
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PHALCON_VERSION=5.17.0
+    container_name: php858_workspace_phalcon
+    ports:
+      - "8000:8000"  # Para o PHP embutido ou Laravel
+      - "5173:5173"  # expondo o Vite
+    volumes:
+      - ./:/var/www
+    environment:
+      - PHP_VERSION=8.4.23
+      - PHALCON_VERSION=5.17.0
+    depends_on:
+      - postgres
+    command: php -S 0.0.0.0:8000 -t /var/www/public
+
+  postgres:
+    image: postgres:18.4
+    container_name: postgres_phalcon
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: phalcon_db
+      POSTGRES_USER: phalcon_user
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - ./pgdata:/var/lib/postgresql/18/docker  # Dados do banco salvos localmente
