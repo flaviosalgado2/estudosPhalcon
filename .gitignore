@@ -1,2 +1,19 @@
+# Environment files
+.env
+.env.backup
+.env.local
+.env.production
 
+# Keep examples
+!.env.example
+!.env.testing
+
+# Dependencies
+/vendor
+
+# Cache
+/cache
+.phpunit.cache
+
+# Local data
 pgdata

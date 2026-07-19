@@ -9,12 +9,17 @@ defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config\Config([
     'database' => [
-        'adapter'     => 'Mysql',
-        'host'        => 'localhost',
-        'username'    => 'root',
-        'password'    => '',
-        'dbname'      => 'test',
-        'charset'     => 'utf8',
+        'adapter'     => match (getenv('DB_CONNECTION')) {
+            'mysql', 'mariadb' => 'Mysql',
+            'pgsql', 'postgres', 'postgresql' => 'Postgresql',
+            'sqlite' => 'Sqlite',
+            default => 'Postgresql',
+        },
+        'host'        => getenv('DB_HOST') ?: 'postgres',
+        'port'        => getenv('DB_PORT') ?: '5432',
+        'username'    => getenv('DB_USERNAME') ?: 'phalcon_user',
+        'password'    => getenv('DB_PASSWORD') ?: 'secret',
+        'dbname'      => getenv('DB_DATABASE') ?: 'phalcon_db',
     ],
     'application' => [
         'appDir'         => APP_PATH . '/',
@@ -25,6 +30,6 @@ return new \Phalcon\Config\Config([
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
-        'baseUri'        => '/',
+        'baseUri'        => getenv('APP_BASE_URI') ?: '/',
     ]
 ]);

@@ -8,6 +8,14 @@ error_reporting(E_ALL);
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 
+/**
+ * Load environment variables from .env file
+ */
+require_once BASE_PATH . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv->safeLoad();
+
 try {
     /**
      * The FactoryDefault Dependency Injector automatically registers
