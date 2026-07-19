@@ -39,7 +39,8 @@ class PessoaFisica extends Model
             'nome',
             new StringLength([
                 'max' => 150,
-                'messageMaximum' => 'O nome deve ter no máximo 150 caracteres'
+                'messageMaximum' => 'O nome deve ter no máximo 150 caracteres',
+                'includedMaximum' => true
             ])
         );
 
@@ -57,6 +58,8 @@ class PessoaFisica extends Model
                 'max' => 20,
                 'messageMinimum' => 'O CPF deve ter pelo menos 11 caracteres',
                 'messageMaximum' => 'O CPF deve ter no máximo 20 caracteres',
+                'includedMinimum' => true,
+                'includedMaximum' => true,
                 'allowEmpty' => true
             ])
         );
