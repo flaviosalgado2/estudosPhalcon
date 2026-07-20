@@ -16,7 +16,6 @@ services:
       - PHALCON_VERSION=5.17.0
     depends_on:
       - postgres
-    command: php -S 0.0.0.0:8000 -t /var/www/public
 
   postgres:
     image: postgres:18.4

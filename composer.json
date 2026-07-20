@@ -8,6 +8,7 @@
     },
     "require-dev": {
         "phalcon/devtools": "^5.0",
+        "phalcon/ide-stubs": "^5.0",
         "pestphp/pest": "^2.0"
     },
     "autoload": {
